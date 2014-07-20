@@ -40,7 +40,7 @@ print(xtable(table1), type="html")
 ```
 
 <!-- html table generated in R 3.0.3 by xtable 1.7-3 package -->
-<!-- Sun Jul 20 14:04:01 2014 -->
+<!-- Sun Jul 20 14:42:13 2014 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Daily Step Total </TH>  </TR>
   <TR> <TD align="right"> mean </TD> <TD align="right"> 10766.19 </TD> </TR>
@@ -57,14 +57,6 @@ colnames(stepsintmeans) <- c("Interval", "Steps")
 ```
 
 
-```r
-maxsteps <- max(stepsintmeans$Steps)
-mrow <- which.max(stepsintmeans$Steps)
-maxinterval <- stepsintmeans[mrow,1]
-```
-
-### The 5-minute interval 835 has the maximum average steps, 206.1698 steps.
-
 Plot time series
 
 ```r
@@ -73,7 +65,16 @@ with(stepsintmeans, plot(Interval, Steps,
                          main = "Average Steps by Interval"))
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png) 
+![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6.png) 
+
+
+```r
+maxsteps <- max(stepsintmeans$Steps)
+mrow <- which.max(stepsintmeans$Steps)
+maxinterval <- stepsintmeans[mrow,1]
+```
+
+### The 5-minute interval 835 has the maximum average steps, 206.1698 steps.
 
 ## Imputing missing values
 
@@ -98,7 +99,7 @@ for(i in 0:2355) {
 }
 ```
 
-NAs were replaced with the average number of steps for that interval.
+NAs were replaced with the average number of steps for that interval, creating a new Complete dataset.
 
 ```r
 for(i in 1:drows){
@@ -109,7 +110,7 @@ for(i in 1:drows){
 }
 ```
 
-Calculate the total for each day for the new Complete dataset.
+Calculate the total steps for each day for the Complete data.
 
 ```r
 stepsdaytotals_comp <- aggregate(dcomplete$steps, by = list(as.Date(as.character(dcomplete$date))), FUN = sum)
@@ -138,7 +139,7 @@ print(xtable(table2), type="html")
 ```
 
 <!-- html table generated in R 3.0.3 by xtable 1.7-3 package -->
-<!-- Sun Jul 20 14:04:08 2014 -->
+<!-- Sun Jul 20 14:42:21 2014 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Original </TH> <TH> Complete </TH>  </TR>
   <TR> <TD align="right"> mean </TD> <TD align="right"> 10766.19 </TD> <TD align="right"> 10766.19 </TD> </TR>
